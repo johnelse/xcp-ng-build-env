@@ -75,7 +75,10 @@ def main():
                         help='Command to run inside the prepared container')
 
     args = parser.parse_args(sys.argv[1:])
-    docker_args = ["docker", "run", "-i", "-t", "-u", "builder"]
+    docker_args = [
+        "docker", "run", "-i", "-t", "-u", "builder",
+        "--privileged=true", "-v", "/etc/localtime:/etc/localtime:ro"
+        ]
     if args.rm:
         docker_args += ["--rm=true"]
     if args.branch:

@@ -12,6 +12,9 @@ COPY    files/RPM-GPG-KEY-Citrix-6.6   /etc/pki/rpm-gpg/RPM-GPG-KEY-Citrix-6.6
 # Add the publicly available repo
 COPY    files/xs.repo /etc/yum.repos.d/xs.repo
 
+# Add the mock config
+ADD     files/default.cfg              /tmp/default.cfg
+
 # Build requirements
 RUN     yum install -y \
             git \
