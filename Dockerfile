@@ -16,6 +16,9 @@ COPY    files/xs.repo.in /tmp/xs.repo.in
 # Fix invalid rpmdb checksum error with overlayfs, see https://github.com/docker/docker/issues/10180
 RUN yum install -y yum-plugin-ovl
 
+# Add the mock config
+ADD     files/default.cfg              /tmp/default.cfg
+
 # Build requirements
 RUN     yum install -y \
             gcc \

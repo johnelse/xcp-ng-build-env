@@ -61,6 +61,7 @@ then
     do
         yumdownloader --destdir=$LOCAL_SRPM_DIR --source $PACKAGE
     done
+
 fi
 
 # Copy in any SRPMs from the directory mounted by the host.
@@ -76,10 +77,20 @@ SRPMS=`find $LOCAL_SRPM_DIR -name *.src.rpm`
 for SRPM in $SRPMS
 do
     sudo yum-builddep -y $SRPM
+
+    rpm -i $SRPM
 done
 
 # double the default stack size
 ulimit -s 16384
+
+mkdir -p /home/builder/rpmbuild/mock
+cp /tmp/default.cfg $HOME/rpmbuild/mock
+ln -sf /etc/mock/logging.ini $HOME/rpmbuild/mock/
+ln -sf /etc/mock/site-defaults.cfg $HOME/rpmbuild/mock/
+
+cd $HOME/rpmbuild
+planex-init
 
 touch $HOME/.setup-complete
 
