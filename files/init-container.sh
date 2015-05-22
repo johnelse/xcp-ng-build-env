@@ -91,6 +91,7 @@ ln -sf /etc/mock/site-defaults.cfg $HOME/rpmbuild/mock/
 
 cd $HOME/rpmbuild
 planex-init
+sed -i -e "s/fc21/el7/" $HOME/rpmbuild/Makefile
 
 touch $HOME/.setup-complete
 
