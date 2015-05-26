@@ -15,6 +15,9 @@ COPY    files/xs.repo /etc/yum.repos.d/xs.repo
 # Add the mock config
 ADD     files/default.cfg              /tmp/default.cfg
 
+# Install EPEL
+RUN     yum install -y epel-release
+
 # Build requirements
 RUN     yum install -y \
             git \
